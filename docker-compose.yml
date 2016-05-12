@@ -1,0 +1,36 @@
+bench:
+    image:
+        poc_nosql_bench
+    command:
+        tail -f /dev/null
+    links:
+        - pg_server
+        - mongodb_server
+        - couchdb_server
+pg_server:
+    image:
+        neogeo/postgresql
+    environment:
+        DATADIR: /data
+        SUPERUSER: neogeo
+        SUPERPASS: myloosesuperpass
+    ports:
+        - "5432:5432"
+mongodb_server:
+    image:
+        neogeo/mongodb
+    environment:
+        DATADIR: /data
+        SUPERUSER: neogeo
+        SUPERPASS: myloosesuperpass
+    ports:
+        - "27017:27017"
+couchdb_server:
+    image:
+        neogeo/couchdb
+    environment:
+        DATADIR: /data
+        SUPERUSER: neogeo
+        SUPERPASS: myloosesuperpass
+    ports:
+        - "5984:5984"
